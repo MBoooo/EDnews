@@ -1,2 +1,4 @@
-# -
-springboot+jpa+thymeleaf+shiro
+# -新闻发布管理系统
+系统后端利用springboot搭建，利用jpa从数据库获取数据，通过thymeleaf进行后端渲染。
+系统设置不同新闻栏目，每个栏目有相对应的管理员管理，后端利用shiro进行权限控制
+前端运用百度的富文本编辑器UEditor
