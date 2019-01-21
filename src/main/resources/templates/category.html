@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+
+<head>
+    <script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/3.3.5/js/bootstrap.min.js}"></script>
+    <link  th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}" rel="stylesheet" />
+    <style>
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle!important;
+        }
+        .content{
+            padding: 0px 20px 20px 20px;
+            border-style: solid;
+            margin-right: 0;
+            margin-left: 0;
+            background-color: #fff;
+            border-color: #ddd;
+            border-width: 1px;
+            border-radius: 4px 4px 0 0;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+        #root{
+            text-align: center;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+<div class="modal fade" tabindex="-1" role="dialog" id="inputBox">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">请输入信息</h4>
+            </div>
+            <div class="modal-body">
+                <form action="#" th:action="@{/category/createOrUpdate}"  method="post" th:object="${category}">
+                    <div class="form-group">
+                        <label for="add-cateId">栏目ID</label>
+                        <input type="text" class="form-control id"  id="add-cateId" placeholder="栏目ID" th:field="*{id}">
+                    </div>
+                    <div class="form-group">
+                        <label for="add-cateName">栏目名称</label>
+                        <input type="text" class="form-control"  id="add-cateName" placeholder="栏目名称" th:field="*{categoryName}">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">关闭</button>
+                        <button type="submit" class="btn btn-primary subModel" >保存</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div th:replace="b_index :: header">
+
+</div>
+
+<!--  	HEADER END   -->
+
+<!-- 	BODY 	-->
+<div class="container">
+    <!-- NAV -->
+    <div class="col-md-3">
+        <div id="left-nav">
+            <nav>
+                <ul class="nav nav-list">
+                    <li>
+                        <div class="panel-group">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#usermanager">
+                                            用户管理
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="usermanager" class="panel-collapse collapse ">
+                                    <div class="panel-body">
+                                        <nav>
+                                            <ul class="nav nav-pills nav-stacked">
+                                                <li role="presentation" >
+                                                    <a href="/user/list#usermanager">用户列表</a>
+                                                </li>
+                                                <li role="presentation" >
+                                                    <a href="/role/list#usermanager">角色管理</a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="panel-group">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#newsmanager">
+                                            新闻管理
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="newsmanager" class="panel-collapse collapse in" >
+                                    <div class="panel-body">
+                                        <nav>
+                                            <ul class="nav nav-pills nav-stacked">
+                                                <li role="presentation">
+                                                    <a href="/news/list">新闻列表</a>
+                                                </li>
+                                                <li role="presentation" class="active">
+                                                    <a href="/category/list">新闻栏目</a>
+                                                </li>
+                                                <li role="presentation">
+                                                    <a href="/editor">新闻发布</a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!-- NAV END -->
+
+    <!-- CONTENT -->
+    <div class="content col-md-9">
+        <!-- PATH -->
+        <div class="row">
+            <ol class="breadcrumb">
+                <li class="active">新闻管理</li>
+                <li>
+                    <a href="#">新闻栏目</a>
+                </li>
+            </ol>
+        </div>
+        <!-- PATH END -->
+        <div class="main-content">
+            <div class="row">
+                <!--<form class="navbar-form navbar-left" role="search" th:action="@{/category/get}">-->
+                    <!--<div class="form-group">-->
+                        <!--<input type="text" class="form-control" placeholder="Search" name="name">-->
+                    <!--</div>-->
+                    <!--<button role="selecte" type="submit" class="btn btn-primary">搜索</button>-->
+                <!--</form>-->
+                <form class="navbar-form" >
+                    <button role="create" type="button" class="btn btn-success" data-toggle="modal" data-target="#inputBox">添加</button>
+                </form>
+            </div>
+            <div class="row table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead class="table-title text-center">
+                    <tr>
+                        <th>栏目ID</th>
+                        <th>栏目名称</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody th:each="category:${cateList}">
+                    <td th:text="${category.id}"></td>
+                    <td th:text="${category.categoryName}"></td>
+                    <td><button type="button" th:onclick="'javascript:edit('+${categoryStat.index}+');'" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#inputBox" >修改</button> &thinsp;
+                        <a th:href="@{/category/delete/{id}(id=${category.id})}"><button  type="button" class="btn btn-sm btn-danger" >删除</button></a>
+                    </td>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- CONTENT END -->
+</div>
+<!-- 	BODY END	-->
+</body>
+<!--	FOOTER		-->
+
+<!--	FOOTER	END	-->
+<script th:inline="javascript">
+    function edit(index){
+        var cateList = [[${cateList}]];
+        $("#add-cateId").val(cateList[index].id);
+        $("#add-cateName").val(cateList[index].categoryName);
+    }
+</script>
+
+</html>

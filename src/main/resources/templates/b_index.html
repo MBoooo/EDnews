@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/3.3.5/js/bootstrap.min.js}"></script>
+    <link  th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}" rel="stylesheet" />
+    <style>
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle!important;
+        }
+        .content{
+            padding: 0px 20px 20px 20px;
+            border-style: solid;
+            margin-right: 0;
+            margin-left: 0;
+            background-color: #fff;
+            border-color: #ddd;
+            border-width: 1px;
+            border-radius: 4px 4px 0 0;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+        #root{
+            text-align: center;
+        }
+
+    </style>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+<!--  	HEADER    -->
+<div class="container" th:fragment="header">
+    <div class="row page-header">
+        <!-- LOGO -->
+        <!--<div class="col-md-2 col-md-offset-1">-->
+            <!--<img src="img/logo.png" />-->
+        <!--</div>-->
+        <!-- LOGO END -->
+
+        <!-- TITLE -->
+        <div id="root">
+            <h1>后台管理系统</h1>
+        </div>
+        <!-- TITLE END -->
+    </div>
+    <nav class="navbar navbar-default navbar-inverse" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="admin-index.html">新闻管理系统</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#">欢迎</a>
+                </li>
+                <li class="dropdown">
+                    <a th:href="${session.user}?'#':'/user/login'" th:text="${session.user}?${session.user.userName}:'请登录'" class="dropdown-toggle" data-toggle="dropdown">
+
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a id="per-info" href="/user/login">选择账号</a>
+                        </li>
+                        <li>
+                            <a id="logout" href="/user/loginOut">注销</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </nav>
+</div>
+<!--  	HEADER END   -->
+
+<!-- 	BODY 	-->
+<div class="container">
+    <!-- NAV -->
+    <div class="col-md-3">
+        <div id="left-nav">
+            <nav>
+                <ul class="nav nav-list">
+                    <li>
+                        <div class="panel-group">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#usermanager">
+                                            管理员管理
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="usermanager" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <nav>
+                                            <ul class="nav nav-pills nav-stacked">
+                                                <li role="presentation">
+                                                    <a href="/user/list">用户管理</a>
+                                                </li>
+                                                <li role="presentation">
+                                                    <a href="/role/list">角色管理</a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="panel-group">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#ordermanager">
+                                            新闻管理
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="ordermanager" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <nav>
+                                            <ul class="nav nav-pills nav-stacked">
+                                                <li role="presentation">
+                                                    <a href="/news/list">新闻列表</a>
+                                                </li>
+                                                <li role="presentation">
+                                                    <a href="/category/list">新闻栏目</a>
+                                                </li>
+                                                <li role="presentation">
+                                                    <a href="/editor">新闻发布</a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!-- NAV END -->
+
+    <!-- CONTENT -->
+    <div class="col-md-9" >
+        <!-- PATH -->
+        <div>
+            <ol class="breadcrumb">
+            </ol>
+        </div>
+        <!-- PATH END -->
+        <div class="main-content">
+
+        </div>
+
+    </div>
+    <!-- CONTENT END -->
+</div>
+<!-- 	BODY END	-->
+
+<!--	FOOTER		-->
+<!--	FOOTER	END	-->
+</body>
+<!--<script src="js/style-control.js"></script>-->
+<script>
+    window.sessionStorage.operation=null;
+    $(function(){
+        if(sessionStorage.statuds=="inLogin"){
+            $("#welcome-out").hide();
+            $("#welcome").append(sessionStorage.userId);
+            $("#welcome").show();
+        }
+    })
+</script>
+</html>

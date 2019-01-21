@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <td th:each="role:${session.user.roles}" th:text="${role.roleName}"></td>
+        </tr>
+    </table>
+</body>
+</html>

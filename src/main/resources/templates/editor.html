@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/3.3.5/js/bootstrap.min.js}"></script>
+    <link  th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}" rel="stylesheet" />
+    <script type="text/javascript" charset="utf-8" th:src="@{js/ueditor/ueditor.config.js}"></script>
+    <script type="text/javascript" charset="utf-8" th:src="@{js/ueditor/ueditor.all.min.js}"> </script>
+    <script type="text/javascript" charset="utf-8" th:src="@{js/ueditor/lang/zh-cn/zh-cn.js}"></script>
+    <style>
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle!important;
+        }
+        .content{
+            padding: 0px 20px 20px 20px;
+            border-style: solid;
+            margin-right: 0;
+            margin-left: 0;
+            background-color: #fff;
+            border-color: #ddd;
+            border-width: 1px;
+            border-radius: 4px 4px 0 0;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+        #root{
+            text-align: center;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>新闻编辑</title>
+</head>
+<body>
+    <div th:replace="b_index :: header">
+
+    </div>
+    <!--  	HEADER END   -->
+
+    <!-- 	BODY 	-->
+    <div class="container">
+        <!-- NAV -->
+        <div class="col-md-3">
+            <div id="left-nav">
+                <nav>
+                    <ul class="nav nav-list">
+                        <li>
+                            <div class="panel-group">
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#usermanager">
+                                                管理员管理
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="usermanager" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <nav>
+                                                <ul class="nav nav-pills nav-stacked">
+                                                    <li role="presentation">
+                                                        <a href="/user/list">用户管理</a>
+                                                    </li>
+                                                    <li role="presentation">
+                                                        <a href="/role/list">角色管理</a>
+                                                    </li>
+                                                </ul>
+                                            </nav>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="panel-group">
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#ordermanager">
+                                                新闻管理
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="ordermanager" class="panel-collapse collapse in">
+                                        <div class="panel-body">
+                                            <nav>
+                                                <ul class="nav nav-pills nav-stacked">
+                                                    <li role="presentation">
+                                                        <a href="/news/list#newsmanager">新闻列表</a>
+                                                    </li>
+                                                    <li role="presentation" >
+                                                        <a href="/category/list#newsmanager">新闻栏目</a>
+                                                    </li>
+                                                    <li role="presentation"  class="active">
+                                                        <a href="/editor#newsmanager">新闻发布</a>
+                                                    </li>
+                                                </ul>
+                                            </nav>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!-- NAV END -->
+
+        <!-- CONTENT -->
+        <div class="col-md-9" >
+            <!-- PATH -->
+            <div>
+                <ol class="breadcrumb">
+                </ol>
+            </div>
+            <!-- PATH END -->
+            <div class="main-content">
+                <div>
+                    <form action="#" th:action="@{/createOrUpdate}" method="post">
+                        <div class="form-group">
+                            <label for="add-newsId">新闻ID</label>
+                            <input type="text" class="form-control id" id="add-newsId" placeholder="新闻ID" th:value="${news.id}">
+                        </div>
+                        <div class="form-group">
+
+                            <label for="add-newsCategory">新闻栏目</label>
+                            <select class="form-control" id="add-newsCategory" name="catename" >
+                                <option th:each="catename : ${cateList}" th:text="${catename}" placeholder="新闻栏目"></option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="add-newsTitle">新闻标题</label>
+                            <input type="text" class="form-control" id="add-newsTitle" placeholder="新闻标题" name="newsTitle" th:value="${news.newsTitle}">
+                        </div>
+                        <div class="form-group" >
+                            <script id="editor" name="newsContent"  type="text/plain" style="width:inherit;height:500px;"></script>
+                        </div>
+                        <button class="btn btn-primary" type="submit">发布</button>
+                    </form>
+
+            </div>
+
+        </div>
+        <!-- CONTENT END -->
+    </div>
+    <!-- 	BODY END	-->
+
+    <!--	FOOTER		-->
+
+    <!--	FOOTER	END	-->
+</body>
+                            <script>
+                        var ue = UE.getEditor('editor');
+                    </script>
+
+</html>

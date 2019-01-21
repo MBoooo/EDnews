@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <link  th:href="@{/webjars/layui/css/layui.css}" rel="stylesheet" />
+    <link  th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}" rel="stylesheet" />
+    <style>
+        .footer{
+            width: 100%;
+            text-align: center;
+        }
+        .footer a{
+            color: gray;
+            font-size: 14px;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>新闻详情</title>
+</head>
+<body>
+    <div class="layui-row">
+        <div class="layui-col-md12">
+            <ul class="layui-nav"  >
+                <li class="layui-nav-item"><a href="#">EDnews</a></li>
+                <li class="layui-nav-item"><a href="/front/index">首页</a></li>
+                <li class="layui-nav-item layui-this"><a href="#">新闻详情</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="news" class="center-block">
+        <div id="title">
+            <h2 th:text="'标题：'+${news.newsTitle}"></h2>
+        </div>
+        <div id="subtitle">
+            <h3 th:text="'作者：'+${user.userName}"></h3>
+            <h3 th:text="'时间：'+${news.addTime}"></h3>
+            <h3 th:text="'阅读量：'+${news.clicks}"></h3>
+        </div>
+        <div id="content">
+            <h1 th:utext="${news.newsContent}"></h1>
+        </div>
+
+    </div>
+    <div class="footer">
+        <a href="https://news.baidu.com/">友情链接</a>
+        <p>@Z09316116   苗博</p>
+    </div>
+</body>
+<script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/3.3.5/js/bootstrap.min.js}"></script>
+</html>

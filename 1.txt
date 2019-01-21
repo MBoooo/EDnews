@@ -1,3 +1,0 @@
-hello world!
-welecome to git!
-hello git!

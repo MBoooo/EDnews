@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+
+<head>
+    <script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/3.3.5/js/bootstrap.min.js}"></script>
+    <link  th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}" rel="stylesheet" />
+    <style>
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle!important;
+        }
+        .content{
+            padding: 0px 20px 20px 20px;
+            border-style: solid;
+            margin-right: 0;
+            margin-left: 0;
+            background-color: #fff;
+            border-color: #ddd;
+            border-width: 1px;
+            border-radius: 4px 4px 0 0;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+        #root{
+            text-align: center;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>新闻列表</title>
+</head>
+<body>
+<!--<div class="modal fade" tabindex="-1" role="dialog" id="inputBox">-->
+    <!--<div class="modal-dialog" role="document">-->
+        <!--<div class="modal-content">-->
+            <!--<div class="modal-header">-->
+                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+                <!--<h4 class="modal-title">请输入信息</h4>-->
+            <!--</div>-->
+            <!--<div class="modal-body">-->
+                <!--<form >-->
+                    <!--<div class="form-group">-->
+                        <!--<label for="add-userId">用户ID</label>-->
+                        <!--<input type="text" class="form-control id" id="add-userId" placeholder="用户ID">-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                        <!--<label for="add-userName">用户名</label>-->
+                        <!--<input type="text" class="form-control" id="add-userName" placeholder="商品名称">-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+
+                        <!--<label for="add-userPassword">用户密码</label>-->
+                        <!--<input type="password" class="form-control password" id="add-userPassword" placeholder="密码">-->
+
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+
+
+                        <!--<label for="add-userCheckPassword">确认密码</label>-->
+                        <!--<input type="password" class="form-control password" id="add-userCheckPassword" placeholder="请再次输入密码">-->
+
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+
+
+                        <!--<label for="add-userSecurity">密保问题</label>-->
+                        <!--<input type="text" class="form-control" id="add-userSecurity" placeholder="你智障吗">-->
+
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+
+
+                        <!--<label for="add-userSecurityResult">密保答案</label>-->
+                        <!--<input type="text" class="form-control" id="add-userSecurityResult" placeholder="对">-->
+
+                    <!--</div>-->
+                <!--</form>-->
+            <!--</div>-->
+            <!--<div class="modal-footer">-->
+                <!--<button type="button" class="btn btn-danger" data-dismiss="modal">关闭</button>-->
+                <!--<button type="button" class="btn btn-primary subModel" data-dismiss="modal">保存</button>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--&lt;!&ndash; /.modal-content &ndash;&gt;-->
+    <!--</div>-->
+    <!--&lt;!&ndash; /.modal-dialog &ndash;&gt;-->
+<!--</div>-->
+<div th:replace="b_index :: header">
+
+</div>
+<!--  	HEADER END   -->
+
+<!-- 	BODY 	-->
+<div class="container">
+    <!-- NAV -->
+    <div class="col-md-3">
+        <div id="left-nav">
+            <nav>
+                <ul class="nav nav-list">
+                    <li>
+                        <div class="panel-group">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#usermanager">
+                                            用户管理
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="usermanager" class="panel-collapse collapse ">
+                                    <div class="panel-body">
+                                        <nav>
+                                            <ul class="nav nav-pills nav-stacked">
+                                                <li role="presentation" >
+                                                    <a href="/user/list#usermanager">用户列表</a>
+                                                </li>
+                                                <li role="presentation" >
+                                                    <a href="/role/list#usermanager">角色管理</a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="panel-group">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#newsmanager">
+                                            新闻管理
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="newsmanager" class="panel-collapse collapse in" >
+                                    <div class="panel-body">
+                                        <nav>
+                                            <ul class="nav nav-pills nav-stacked">
+                                                <li role="presentation" class="active">
+                                                    <a href="/news/list#newsmanager">新闻列表</a>
+                                                </li>
+                                                <li role="presentation" >
+                                                    <a href="/category/list#newsmanager">新闻栏目</a>
+                                                </li>
+                                                <li role="presentation">
+                                                    <a href="/editor">新闻发布</a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!-- NAV END -->
+
+    <!-- CONTENT -->
+    <div class="content col-md-9">
+        <!-- PATH -->
+        <div class="row">
+            <ol class="breadcrumb">
+                <li class="active">新闻管理</li>
+                <li>
+                    <a href="#">新闻列表</a>
+                </li>
+            </ol>
+        </div>
+        <!-- PATH END -->
+        <div class="main-content">
+            <div class="row">
+                <form class="navbar-form navbar-left" action="#" th:action="@{/news/getNews}">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="新闻标题" name="newsTitle">
+                        <input type="text" class="form-control" placeholder="新闻栏目" name="cateName">
+                    </div>
+                    <button  type="submit" class="btn btn-primary" >搜索</button>
+                </form>
+            </div>
+            <div class="row table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead class="table-title text-center">
+                    <tr>
+                        <th>新闻ID</th>
+                        <th>新闻名称</th>
+                        <th>新闻栏目</th>
+                        <th>新闻作者</th>
+                        <th>发布时间</th>
+                        <th>点击量</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody th:each="news:${newsList}" >
+                    <td th:text="${news.id}"></td>
+                    <td th:text="${news.newsTitle}"></td>
+                    <td th:text="${cateList.get(newsStat.index)}"></td>
+                    <td th:text="${userList.get(newsStat.index)}"></td>
+                    <td th:text="${news.addTime}"></td>
+                    <td th:text="${news.clicks}"></td>
+                    <td><a th:href="@{/news/update/{id}(id=${news.id})}"><button type="button" class="btn btn-sm btn-primary"  data-toggle="modal" data-target="#inputBox">修改</button></a> &thinsp;
+                        <a th:href="@{/news/delete/{id}(id=${news.id})}"><button  type="button" class="btn btn-sm btn-danger">删除</button></a>
+                    </td>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- CONTENT END -->
+</div>
+<!-- 	BODY END	-->
+</body>
+<!--	FOOTER		-->
+
+<!--	FOOTER	END	-->
+<scriptb >
+
+</scriptb>
+
+</html>
